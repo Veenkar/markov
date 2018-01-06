@@ -33,13 +33,17 @@ dict_el Markov::getDictEl(std::vector<std::string>::iterator it_from)
 {
     auto res = dict_el();
     auto it = it_from;
-    for ( ; it<it_from + (WINDOW_SIZE) && it != words.end(); it++)
+    for (int i=0; i < WINDOW_SIZE; i++, it++)
     {
+        if (it == words.end())
+        {
+            it = words.begin();
+        }
         res.first.push_back(*it);
     }
     if (it == words.end())
     {
-        return dict_el();
+        it = words.begin();
     }
     res.second = *it;
 
@@ -56,7 +60,7 @@ void Markov::makeDb()
         std::cerr << "makeDb: not enough data" << std::endl;
         return;
     }
-    for (auto it = words.begin(); it != (words.end() - 2); it++)
+    for (auto it = words.begin(); it != (words.end()); it++)
     {
         db.insert(getDictEl(it));
     }
@@ -80,7 +84,7 @@ window_el Markov::gen(size_t size)
         return string_vector();
     }
 
-    size_t rand_word_pos = randBelow(words.size() - WINDOW_SIZE);
+    size_t rand_word_pos = randBelow(words.size() - WINDOW_SIZE - 1);
     //std::cout << rand_word_pos << std::endl;
 
     window_el start_words;

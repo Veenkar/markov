@@ -13,7 +13,7 @@
 #define MIN(a,b) ( ((a)<(b))? (a): (b) )
 #define MAX(a,b) ( ((a)>(b))? (a): (b) )
 
-#define WINDOW_SIZE 1
+#define WINDOW_SIZE 3
 
 typedef std::pair       <std::string, std::string>      string_pair;
 typedef std::vector     <std::string>                   string_vector;
